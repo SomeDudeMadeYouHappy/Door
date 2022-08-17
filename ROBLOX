@@ -1,3 +1,28 @@
+spawn(function()
+    while wait(2) do
+for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
+    if v:IsA('Model')  and v.Name == "LeverForGate" and not v:FindFirstChild("BillboardGui") then -- checks if it has a handle and if its a touchtransmitter
+        local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
+        local TextLabel = Instance.new('TextLabel') -- makes text label
+        
+        BillboardGui.Parent = v -- what the billboardgui goes into
+        BillboardGui.AlwaysOnTop = true -- if its on top or not
+        BillboardGui.Size = UDim2.new(0, 50, 0, 50) -- size of it
+        BillboardGui.StudsOffset = Vector3.new(0,2,0)
+        
+        TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
+        TextLabel.BackgroundColor3 = Color3.new(1,1,1) -- color
+        TextLabel.BackgroundTransparency = 1 -- transparency
+        TextLabel.Size = UDim2.new(1, 0, 1, 0) -- size
+        TextLabel.Text = "Lever For Gate!11" -- what the label says
+        TextLabel.TextColor3 = Color3.new(1, 0, 0) -- color
+        TextLabel.TextScaled = true -- if the text is scaled or not
+    end
+end
+wait()
+end
+end)
+
 local a = game:GetService "Players"
 local b = game:GetService "ReplicatedStorage"
 local c = game:GetService "Workspace"
@@ -131,7 +156,6 @@ do
         w.Visible = Toggles.INTERACT_CHAMS.Value
         w.Color3 = Color3.new(1, 1, 1)
         w.Transparency = 0.5
-        w.Size = v.Size + Vector3.new(0.1, 0.1, 0.1)
         w.AlwaysOnTop = true
         w.ZIndex = 5
         w.Adornee = v
@@ -297,24 +321,18 @@ do
                 }
                 
             )
-            C:AddToggle(
-                "KEY_ENABLED",
-                {
-                    Text = "ESP Key",
-                    Default = true,
-                    Tooltip = "Auto ESP All Key Place! methangloc beo"
-                }
-                
-            )
-            C:AddToggle(
-                "LEVER_ENABLED",
-                {
-                    Text = "ESP Lever ( Gate )",
-                    Default = true,
-                    Tooltip = "Auto ESP All Level For Gate, methangloc beo"
-                }
-                
-            )
+
+            C:AddButton(
+                "Delete Lever Gate ESP",
+                function()
+                for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
+                    if v:IsA('Model')  and v.Name == "LeverForGate" and  v:FindFirstChild("BillboardGui") then -- checks if it has a handle and if its a touchtransmitter
+               v.BillboardGui:Destroy()
+            end
+            end
+        end
+    )
+
             local D = B:AddTab "World Mods"
             D:AddToggle(
                 "REMOVE_AMBIENCE",
@@ -338,6 +356,11 @@ do
             )
         end
         do
+         
+            local B = A:AddRightGroupbox "ESP Door Can Go: ON"
+            local B = A:AddRightGroupbox "ESP Key: ON"
+            local B = A:AddRightGroupbox "ESP Lever Gate: ON"
+
             local B = A:AddRightGroupbox "Notifiers"
             B:AddToggle(
                 "EVENT_NOTIFIER",
@@ -428,6 +451,8 @@ c.CurrentRooms.DescendantAdded:Connect(
 Toggles.DOOR_ENABLED:OnChanged(
     function(value)
         if Toggles.DOOR_ENABLED.Value then
+            spawn(function()
+            while wait(2) do
     for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
         if v:IsA('Model')  and v.Name == "Door" and not v:FindFirstChild("BillboardGui") then -- checks if it has a handle and if its a touchtransmitter
             local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
@@ -447,6 +472,9 @@ Toggles.DOOR_ENABLED:OnChanged(
             TextLabel.TextScaled = true -- if the text is scaled or not
         end
     end
+ wait()
+end
+end)
 else
     for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
         if v:IsA('Model')  and v.Name == "Door" and  v:FindFirstChild("BillboardGui") then 
@@ -456,69 +484,11 @@ else
 end
     end)
 
-    Toggles.KEY_ENABLED:OnChanged(
-    function(value)
-        if Toggles.KEY_ENABLED.Value then
-            for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
-                if v:IsA('Model')  and string.find(v.Name,"Key") and not v:FindFirstChild("BillboardGui") then -- checks if it has a handle and if its a touchtransmitter
-                    local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
-                    local TextLabel = Instance.new('TextLabel') -- makes text label
-                    
-                    BillboardGui.Parent = v -- what the billboardgui goes into
-                    BillboardGui.AlwaysOnTop = true -- if its on top or not
-                    BillboardGui.Size = UDim2.new(0, 50, 0, 50) -- size of it
-                    BillboardGui.StudsOffset = Vector3.new(0,2,0)
-                    
-                    TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
-                    TextLabel.BackgroundColor3 = Color3.new(1,1,1) -- color
-                    TextLabel.BackgroundTransparency = 1 -- transparency
-                    TextLabel.Size = UDim2.new(1, 0, 1, 0) -- size
-                    TextLabel.Text = "Key Place" -- what the label says
-                    TextLabel.TextColor3 = Color3.new(1, 0, 0) -- color
-                    TextLabel.TextScaled = true -- if the text is scaled or not
-                end
-            end
-else
-    for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
-        if v:IsA('Model')  and string.find(v.Name,"Key") and  v:FindFirstChild("BillboardGui") then -- checks if it has a handle and if its a touchtransmitter
-           v.BillboardGui:Destroy()
-        end
-    end
-end
-    end)
+  
 
-    Toggles.LEVER_ENABLED:OnChanged(
-        function(value)
-            if Toggles.LEVER_ENABLED.Value then
-               
-            for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
-                if v:IsA('Model')  and v.Name == "LeverForGate" and not v:FindFirstChild("BillboardGui") then -- checks if it has a handle and if its a touchtransmitter
-                    local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
-                    local TextLabel = Instance.new('TextLabel') -- makes text label
-                    
-                    BillboardGui.Parent = v -- what the billboardgui goes into
-                    BillboardGui.AlwaysOnTop = true -- if its on top or not
-                    BillboardGui.Size = UDim2.new(0, 50, 0, 50) -- size of it
-                    BillboardGui.StudsOffset = Vector3.new(0,2,0)
-                    
-                    TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
-                    TextLabel.BackgroundColor3 = Color3.new(1,1,1) -- color
-                    TextLabel.BackgroundTransparency = 1 -- transparency
-                    TextLabel.Size = UDim2.new(1, 0, 1, 0) -- size
-                    TextLabel.Text = "Lever For Gate!11" -- what the label says
-                    TextLabel.TextColor3 = Color3.new(1, 0, 0) -- color
-                    TextLabel.TextScaled = true -- if the text is scaled or not
-                end
-            end
 
-    else
-        for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
-            if v:IsA('Model')  and v.Name == "LeverForGate" and  v:FindFirstChild("BillboardGui") then -- checks if it has a handle and if its a touchtransmitter
-       v.BillboardGui:Destroy()
-    end
-end
-    end
-        end)
+   
+
 
 l.LatestRoom.Changed:Connect(
     function(z)
@@ -656,4 +626,4 @@ do
         task.defer(v, A)
     end
 end
-return g:Notify "[Doors] Loaded!"
+return g:Notify "[Doors] Loaded Nhu Cach Phus Khong Co Dad :joy:"
