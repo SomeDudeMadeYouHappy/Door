@@ -1,3 +1,4 @@
+ print("Script Loaded")
 spawn(function()
     while wait(2) do
 for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
