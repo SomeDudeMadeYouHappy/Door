@@ -306,7 +306,7 @@ end
 local y = function(y)
     if y.Name == "RushMoving" then
         if Toggles.EVENT_NOTIFIER.Value then
-            g:Notify "[Event Notifier]: Rush spawned, hide quickly!"
+            g:Notify "[Event Notifier]: Rush Da Den spawned, hide quickly before he chit nat cac may!1111!!"
         end
     elseif y.Name == "AmbushMoving" then
         if Toggles.EVENT_NOTIFIER.Value then
@@ -390,7 +390,7 @@ do
             local B = A:AddRightGroupbox "ESP Door Can Go: ON"
             local B = A:AddRightGroupbox "ESP Key: ON"
             local B = A:AddRightGroupbox "ESP Lever Gate: ON"
-
+        local B = A:AddRightGroupbox "ESP Players: ON"
             local B = A:AddRightGroupbox "Notifiers"
             B:AddToggle(
                 "EVENT_NOTIFIER",
