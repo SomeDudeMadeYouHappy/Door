@@ -329,7 +329,7 @@ do
                     Text = "Speed Boost",
                     Min = 0,
                     Max = 100,
-                    Default = 0,
+                    Default = 0.8,
                     Rounding = 1,
                     Suffix = ""
                 }
