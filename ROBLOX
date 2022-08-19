@@ -318,9 +318,9 @@ end
 g:SetWatermark "Trung Binh Nguoi Choi Door Giong Me Thang Loc Kieu:"
 g:Notify "Loading % Me Loc Beo..."
 do
-    local z = g:CreateWindow "Doors"
+    local z = g:CreateWindow "Doors Nung Cac Duy"
     do
-        local A = z:AddTab "Gameplay"
+        local A = z:AddTab "Gameplay Duy Cu Be"
         do
             local B = A:AddLeftTabbox "Modifications"
             local C = B:AddTab "Character Mods"
@@ -447,7 +447,7 @@ do
                 g:Unload()
             end
         )
-        B:AddLabel "Menu bind":AddKeyPicker("MenuKeybind", {Default = "End", NoUI = true, Text = "Menu keybind"})
+   
         B:AddToggle("Keybinds", {Text = "Show Keybinds Menu", Default = true}):OnChanged(
             function()
                 g.KeybindFrame.Visible = Toggles.Keybinds.Value
