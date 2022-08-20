@@ -1,4 +1,5 @@
- print("Script Loaded")
+print("Script Loaded")
+ 
 spawn(function()
     while wait(2) do
 for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
@@ -15,7 +16,7 @@ for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from wo
         TextLabel.BackgroundColor3 = Color3.new(1,1,1) -- color
         TextLabel.BackgroundTransparency = 1 -- transparency
         TextLabel.Size = UDim2.new(1, 0, 1, 0) -- size
-        TextLabel.Text = "Lever For Gate!11" -- what the label says
+        TextLabel.Text = "Lever For Gate" -- what the label says
         TextLabel.TextColor3 = Color3.new(1, 0, 0) -- color
         TextLabel.TextScaled = true -- if the text is scaled or not
     end
@@ -308,6 +309,7 @@ local y = function(y)
     if y.Name == "RushMoving" then
         if Toggles.EVENT_NOTIFIER.Value then
             g:Notify "[Event Notifier]: Rush Da Den spawned, hide quickly before he chit nat cac may!1111!!"
+             wait()
         end
     elseif y.Name == "AmbushMoving" then
         if Toggles.EVENT_NOTIFIER.Value then
@@ -315,8 +317,19 @@ local y = function(y)
         end
     end
 end
+
+
+g:Notify("Floor|Room Have Event:"  .. game:GetService("ReplicatedStorage").GameData.ChaseStart.Value)
+spawn(function()
+ game:GetService("ReplicatedStorage").GameData.ChaseStart.Changed:Connect(function()
+      task.wait()  
+      if  game:GetService("ReplicatedStorage").GameData.ChaseStart.Value then
+        g:Notify("Next Floor|Room Have Event:"  .. game:GetService("ReplicatedStorage").GameData.ChaseStart.Value)
+      end
+  end)
+end)
+
 g:SetWatermark "Trung Binh Nguoi Choi Door Giong Me Thang Loc Kieu:"
-g:Notify "Loading % Me Loc Beo..."
 do
     local z = g:CreateWindow "Doors Nung Cac Duy"
     do
@@ -352,6 +365,23 @@ do
                 }
                 
             )
+            C:AddToggle(
+                "INTERACT_ENABLED",
+                {
+                    Text = "Destroy Seek Arm + Object While Running",
+                    Default = true,
+                    Tooltip = "me may beo!111"
+                }
+                
+
+              
+            )
+            C:AddButton(
+                "Complete Electric Box MiniGame ( OPEN box first!)",
+                function()
+                    game:GetService("ReplicatedStorage").Bricks.EBF:FireServer()
+        end
+    )
 
             C:AddButton(
                 "Delete Lever Gate ESP",
@@ -363,6 +393,7 @@ do
             end
         end
     )
+    
 
             local D = B:AddTab "World Mods"
             D:AddToggle(
@@ -479,6 +510,26 @@ c.CurrentRooms.DescendantAdded:Connect(
     end
 )
 
+
+game:GetService("Workspace").CurrentRooms.DescendantAdded:Connect(function(descendant)
+
+    if Toggles.INTERACT_ENABLED.Value == true and descendant.Name == ("Seek_Arm" or "ChandelierObstruction") then
+
+        task.spawn(function()
+
+            wait(0.01)
+
+            descendant:Destroy()
+
+        end)
+
+    end
+
+end)
+
+
+
+
 Toggles.DOOR_ENABLED:OnChanged(
     function(value)
         if Toggles.DOOR_ENABLED.Value then
@@ -526,7 +577,7 @@ l.LatestRoom.Changed:Connect(
         if Toggles.EVENT_NOTIFIER.Value then
             local A = l.ChaseStart.Value - z
             if 0 < A and A < 4 then
-                g:Notify("[Event Notifier]: There is an event in '" .. tostring(A) .. "' rooms!")
+                g:Notify("[Event Notifier]: There is an event in the next '" .. tostring(A) .. "' rooms!")
             end
         end
     end
