@@ -1,5 +1,11 @@
 print("Script Loaded")
- 
+
+ for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.MainUI:GetChildren()) do
+ if string.find(v.Name,"Jumpscare") then 
+ v:Destroy()
+end
+end
+ print("Destroyed JumpScare")
 spawn(function()
     while wait(2) do
 for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
